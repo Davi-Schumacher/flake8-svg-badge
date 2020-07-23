@@ -13,8 +13,8 @@ from flake8_svg_badge.reporter import ReportSVGBadge
 
 def test_exception_on_no_image_path():
 
-    with pytest.raises(Exception):
-        rp = ReportSVGBadge(Values({'output_file': None}))
+    with pytest.raises(SystemExit):
+        rp = ReportSVGBadge(Values({'format': 'svg', 'image': None, 'output_file': None}))
 
 
 def test_parse_file_no_errors():
@@ -24,7 +24,7 @@ def test_parse_file_no_errors():
     cwd = os.getcwd()
     os.chdir(target_path)
     try:
-        rp = ReportSVGBadge(Values({'output_file': None, 'image': '123.svg'}))
+        rp = ReportSVGBadge(Values({'output_file': None, 'image': '123.svg', 'format': 'svg'}))
 
         with open('lala.py', 'w') as f:
             f.write('print(123)\n')
@@ -58,7 +58,7 @@ def test_parse_file_one_error():
     cwd = os.getcwd()
     os.chdir(target_path)
     try:
-        rp = ReportSVGBadge(Values({'output_file': None, 'image': '123.svg'}))
+        rp = ReportSVGBadge(Values({'output_file': None, 'image': '123.svg', 'format': 'svg'}))
 
         with open('lala.py', 'w') as f:
             f.write('print(123)\n')
