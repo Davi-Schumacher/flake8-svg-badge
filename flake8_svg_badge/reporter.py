@@ -1,3 +1,4 @@
+from argparse import ArgumentParser, SUPPRESS
 import sys
 from functools import reduce
 from textwrap import dedent
@@ -53,6 +54,8 @@ def find_color(total):
 
 
 class ReportSVGBadge(base.BaseFormatter):
+    
+    name = "flake8-svg-badge"
 
     def __init__(self, options):
         super().__init__(options)
@@ -63,8 +66,9 @@ class ReportSVGBadge(base.BaseFormatter):
     def after_init(self):
         super().after_init()
 
-        if not self.options.image:
-            raise Exception('--image must be given to generate svg badge')
+        if self.options.format == 'svg' and not self.options.image:
+            parser = ArgumentParser(usage=SUPPRESS)
+            parser.error('--image must be given to generate svg badge')
 
     def beginning(self, filename):
         super().beginning(filename)
