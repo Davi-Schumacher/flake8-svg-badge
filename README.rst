@@ -10,6 +10,11 @@ flake8-svg-badge
 
 Svg badge that shows % of problem-free code
 
+Usage
+-----
+.. code-block:: bash
+    
+    flake8 --format svg --image flake8.svg
 
 Features
 --------
